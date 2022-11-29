@@ -1,0 +1,589 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.org/kulturarena/"
+     xml:base="http://example.org/kulturarena/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:ub="http://swat.cse.lehigh.edu/onto/univ-bench.owl##"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace">
+    <owl:Ontology rdf:about="">
+        <rdfs:label xml:lang="en">Kulturarena Ontology</rdfs:label>
+    </owl:Ontology>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#date -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#date"/>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://example.org/kulturarena/has_member -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/kulturarena/has_member">
+        <rdfs:label xml:lang="en">has member</rdfs:label>
+        <rdfs:comment xml:lang="en">Defines that something has someone as a member.</rdfs:comment>
+        <rdfs:range rdf:resource="http://example.org/kulturarena/artist"/>
+        <owl:propertyDisjointWith rdf:resource="http://example.org/kulturarena/is_member_of"/>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/music_provider"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://example.org/kulturarena/has_played -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/kulturarena/has_played">
+        <rdfs:label xml:lang="en">has played</rdfs:label>
+        <rdfs:comment xml:lang="en">Defines that someone has played something.</rdfs:comment>
+        <rdfs:range rdf:resource="http://example.org/kulturarena/concert"/>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/music_provider"/>
+        <owl:propertyDisjointWith rdf:resource="http://example.org/kulturarena/was_played_by"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://example.org/kulturarena/is_birth_place_of -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/kulturarena/is_birth_place_of">
+        <rdfs:label xml:lang="en">is birth place of</rdfs:label>
+        <rdfs:comment xml:lang="en">Defines the birth place of someone.</rdfs:comment>
+        <rdfs:range rdf:resource="http://example.org/kulturarena/artist"/>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/country"/>
+        <owl:propertyDisjointWith rdf:resource="http://example.org/kulturarena/is_born_in"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://example.org/kulturarena/is_born_in -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/kulturarena/is_born_in">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:label xml:lang="en">is born in</rdfs:label>
+        <rdfs:comment xml:lang="en">Defines where someone was born.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/artist"/>
+        <rdfs:range rdf:resource="http://example.org/kulturarena/country"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://example.org/kulturarena/is_founding_place_of -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/kulturarena/is_founding_place_of">
+        <rdfs:label xml:lang="en">is founding place of</rdfs:label>
+        <rdfs:comment xml:lang="en">Defines what was founded at a specific place.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/country"/>
+        <rdfs:range rdf:resource="http://example.org/kulturarena/music_provider"/>
+        <owl:propertyDisjointWith rdf:resource="http://example.org/kulturarena/was_founded_in"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://example.org/kulturarena/is_member_of -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/kulturarena/is_member_of">
+        <rdfs:label xml:lang="en">is member of</rdfs:label>
+        <rdfs:comment xml:lang="en">Defines that someone is member of something.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/artist"/>
+        <rdfs:range rdf:resource="http://example.org/kulturarena/music_provider"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://example.org/kulturarena/musicbrainz_artist_id -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/kulturarena/musicbrainz_artist_id">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:label xml:lang="en">MusicBrainz artist ID</rdfs:label>
+        <rdfs:comment xml:lang="en">The ID of an artist on MusicBrainz.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/music_provider"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://example.org/kulturarena/was_founded_in -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/kulturarena/was_founded_in">
+        <rdfs:label xml:lang="en">was founded in</rdfs:label>
+        <rdfs:comment xml:lang="en">Defines where something was founded.</rdfs:comment>
+        <rdfs:range rdf:resource="http://example.org/kulturarena/country"/>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/music_provider"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://example.org/kulturarena/was_played_by -->
+
+    <owl:ObjectProperty rdf:about="http://example.org/kulturarena/was_played_by">
+        <rdfs:label xml:lang="en">was played by</rdfs:label>
+        <rdfs:comment xml:lang="en">Defines that something was played by someone.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/concert"/>
+        <rdfs:range rdf:resource="http://example.org/kulturarena/music_provider"/>
+    </owl:ObjectProperty>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://example.org/kulturarena/birthdate -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/kulturarena/birthdate">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:label xml:lang="en">Birthdate</rdfs:label>
+        <rdfs:comment xml:lang="en">Birthdate of someone.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/artist"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://example.org/kulturarena/date -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/kulturarena/date">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:label xml:lang="en">Date</rdfs:label>
+        <rdfs:comment xml:lang="en">The date of something.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/concert"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://example.org/kulturarena/gender -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/kulturarena/gender">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:label xml:lang="en">Gender</rdfs:label>
+        <rdfs:comment xml:lang="en">The gender of someone.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/artist"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://example.org/kulturarena/genre -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/kulturarena/genre">
+        <rdfs:label xml:lang="en">Genre</rdfs:label>
+        <rdfs:comment xml:lang="en">The genre of something.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/music_provider"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://example.org/kulturarena/musicbrainz_artist_id -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/kulturarena/musicbrainz_artist_id">
+        <rdfs:label xml:lang="en">MusicBrainz artist ID</rdfs:label>
+        <rdfs:comment xml:lang="en">The ID of an artist on MusicBrainz.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://example.org/kulturarena/name -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/kulturarena/name">
+        <rdfs:label xml:lang="en">Name</rdfs:label>
+        <rdfs:comment xml:lang="en">The name of something.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/artist"/>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/country"/>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/music_provider"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+
+
+    <!-- http://example.org/kulturarena/population -->
+
+    <owl:DatatypeProperty rdf:about="http://example.org/kulturarena/population">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:label xml:lang="en">Population</rdfs:label>
+        <rdfs:comment xml:lang="en">The population size of something.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/kulturarena/country"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://example.org/kulturarena/artist -->
+
+    <owl:Class rdf:about="http://example.org/kulturarena/artist">
+        <rdfs:label xml:lang="en">Artist</rdfs:label>
+        <rdfs:comment xml:lang="en">Is a music provider or is with other artists a part of a music provider.</rdfs:comment>
+    </owl:Class>
+
+
+
+    <!-- http://example.org/kulturarena/concert -->
+
+    <owl:Class rdf:about="http://example.org/kulturarena/concert">
+        <rdfs:label xml:lang="en">Concert</rdfs:label>
+        <rdfs:comment xml:lang="en">A event that is done by music provider at Kulturarena in jena to a specific date.</rdfs:comment>
+    </owl:Class>
+
+
+
+    <!-- http://example.org/kulturarena/country -->
+
+    <owl:Class rdf:about="http://example.org/kulturarena/country">
+        <rdfs:label xml:lang="en">Country</rdfs:label>
+        <rdfs:comment xml:lang="en">A country.</rdfs:comment>
+    </owl:Class>
+
+
+
+    <!-- http://example.org/kulturarena/music_provider -->
+
+    <owl:Class rdf:about="http://example.org/kulturarena/music_provider">
+        <rdfs:label xml:lang="en">Music provider</rdfs:label>
+        <rdfs:comment xml:lang="en">An artist or multiple artists that do concerts.</rdfs:comment>
+    </owl:Class>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://example.org/kulturarena/artist1 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/artist1">
+        <rdf:type rdf:resource="http://example.org/kulturarena/artist"/>
+        <birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1985-10-28</birthdate>
+        <gender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Female</gender>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Valeska Steiner</name>
+        <is_born_in rdf:resource="http://example.org/kulturarena/country2"/>
+        <is_member_of rdf:resource="http://example.org/kulturarena/provider1"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/artist2 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/artist2">
+        <rdf:type rdf:resource="http://example.org/kulturarena/artist"/>
+        <birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1976-11-30</birthdate>
+        <gender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Female</gender>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sonja Glass</name>
+        <is_born_in rdf:resource="http://example.org/kulturarena/country1"/>
+        <is_member_of rdf:resource="http://example.org/kulturarena/provider1"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/artist3 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/artist3">
+        <rdf:type rdf:resource="http://example.org/kulturarena/artist"/>
+        <birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1958-09-28</birthdate>
+        <gender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Male</gender>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pit Baumgartner</name>
+        <is_born_in rdf:resource="http://example.org/kulturarena/country1"/>
+        <is_member_of rdf:resource="http://example.org/kulturarena/provider2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/artist4 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/artist4">
+        <rdf:type rdf:resource="http://example.org/kulturarena/artist"/>
+        <birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1968-04-12</birthdate>
+        <gender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Female</gender>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pat Appleton</name>
+        <is_born_in rdf:resource="http://example.org/kulturarena/country4"/>
+        <is_member_of rdf:resource="http://example.org/kulturarena/provider2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/artist5 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/artist5">
+        <rdf:type rdf:resource="http://example.org/kulturarena/artist"/>
+        <birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1968-01-08</birthdate>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Karl Friederson</name>
+        <gender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Male</gender>
+        <is_born_in rdf:resource="http://example.org/kulturarena/country4"/>
+        <is_member_of rdf:resource="http://example.org/kulturarena/provider2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/artist6 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/artist6">
+        <rdf:type rdf:resource="http://example.org/kulturarena/artist"/>
+        <birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1957-09-25</birthdate>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Barbara Lahr</name>
+        <gender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Female</gender>
+        <is_born_in rdf:resource="http://example.org/kulturarena/country1"/>
+        <is_member_of rdf:resource="http://example.org/kulturarena/provider2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/artist7 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/artist7">
+        <rdf:type rdf:resource="http://example.org/kulturarena/artist"/>
+        <birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1972-01-30</birthdate>
+        <gender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Male</gender>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Oli Rubow</name>
+        <is_born_in rdf:resource="http://example.org/kulturarena/country1"/>
+        <is_member_of rdf:resource="http://example.org/kulturarena/provider2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/artist8 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/artist8">
+        <rdf:type rdf:resource="http://example.org/kulturarena/artist"/>
+        <birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1966-11-22</birthdate>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Joo Kraus</name>
+        <gender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Male</gender>
+        <is_born_in rdf:resource="http://example.org/kulturarena/country1"/>
+        <is_member_of rdf:resource="http://example.org/kulturarena/provider2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/artist9 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/artist9">
+        <rdf:type rdf:resource="http://example.org/kulturarena/artist"/>
+        <birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1976</birthdate>
+        <gender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Female</gender>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Yasmin Hamdan</name>
+        <is_born_in rdf:resource="http://example.org/kulturarena/country3"/>
+        <is_member_of rdf:resource="http://example.org/kulturarena/provider3"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/concert1 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/concert1">
+        <rdf:type rdf:resource="http://example.org/kulturarena/concert"/>
+        <date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2012</date>
+        <was_played_by rdf:resource="http://example.org/kulturarena/provider1"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/concert2 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/concert2">
+        <rdf:type rdf:resource="http://example.org/kulturarena/concert"/>
+        <date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016</date>
+        <was_played_by rdf:resource="http://example.org/kulturarena/provider1"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/concert3 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/concert3">
+        <rdf:type rdf:resource="http://example.org/kulturarena/concert"/>
+        <date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2001</date>
+        <was_played_by rdf:resource="http://example.org/kulturarena/provider2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/concert4 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/concert4">
+        <rdf:type rdf:resource="http://example.org/kulturarena/concert"/>
+        <date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2003</date>
+        <was_played_by rdf:resource="http://example.org/kulturarena/provider2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/concert5 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/concert5">
+        <rdf:type rdf:resource="http://example.org/kulturarena/concert"/>
+        <date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2007</date>
+        <was_played_by rdf:resource="http://example.org/kulturarena/provider2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/concert6 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/concert6">
+        <rdf:type rdf:resource="http://example.org/kulturarena/concert"/>
+        <date rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015</date>
+        <was_played_by rdf:resource="http://example.org/kulturarena/provider3"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/country1 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/country1">
+        <rdf:type rdf:resource="http://example.org/kulturarena/country"/>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">149</population>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">300</population>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">83</population>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Germany</name>
+        <is_birth_place_of rdf:resource="http://example.org/kulturarena/artist2"/>
+        <is_birth_place_of rdf:resource="http://example.org/kulturarena/artist3"/>
+        <is_birth_place_of rdf:resource="http://example.org/kulturarena/artist4"/>
+        <is_birth_place_of rdf:resource="http://example.org/kulturarena/artist6"/>
+        <is_birth_place_of rdf:resource="http://example.org/kulturarena/artist7"/>
+        <is_birth_place_of rdf:resource="http://example.org/kulturarena/artist8"/>
+        <is_founding_place_of rdf:resource="http://example.org/kulturarena/provider1"/>
+        <is_founding_place_of rdf:resource="http://example.org/kulturarena/provider2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/country2 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/country2">
+        <rdf:type rdf:resource="http://example.org/kulturarena/country"/>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">017</population>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">466</population>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</population>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Switzerland</name>
+        <is_birth_place_of rdf:resource="http://example.org/kulturarena/artist1"/>
+        <is_founding_place_of rdf:resource="http://example.org/kulturarena/provider1"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/country3 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/country3">
+        <rdf:type rdf:resource="http://example.org/kulturarena/country"/>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">261</population>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">372</population>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</population>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lebanon</name>
+        <is_birth_place_of rdf:resource="http://example.org/kulturarena/artist9"/>
+        <is_founding_place_of rdf:resource="http://example.org/kulturarena/provider3"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/country4 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/country4">
+        <rdf:type rdf:resource="http://example.org/kulturarena/country"/>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">281</population>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">331</population>
+        <population rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">449</population>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">United states of america</name>
+        <is_birth_place_of rdf:resource="http://example.org/kulturarena/artist5"/>
+        <is_founding_place_of rdf:resource="http://example.org/kulturarena/provider3"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/provider1 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/provider1">
+        <rdf:type rdf:resource="http://example.org/kulturarena/music_provider"/>
+        <musicbrainz_artist_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2e76bad0-edf3-4a6c-ad79-db87bb5a0d35</musicbrainz_artist_id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BOY</name>
+        <genre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">pop</genre>
+        <has_member rdf:resource="http://example.org/kulturarena/artist1"/>
+        <has_member rdf:resource="http://example.org/kulturarena/artist2"/>
+        <has_played rdf:resource="http://example.org/kulturarena/concert1"/>
+        <has_played rdf:resource="http://example.org/kulturarena/concert2"/>
+        <was_founded_in rdf:resource="http://example.org/kulturarena/country1"/>
+        <was_founded_in rdf:resource="http://example.org/kulturarena/country2"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/provider2 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/provider2">
+        <rdf:type rdf:resource="http://example.org/kulturarena/music_provider"/>
+        <musicbrainz_artist_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5c47ccd3-3f82-46b9-96b8-efdffc83f269</musicbrainz_artist_id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">De-Phazz</name>
+        <genre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jazz</genre>
+        <has_member rdf:resource="http://example.org/kulturarena/artist3"/>
+        <has_member rdf:resource="http://example.org/kulturarena/artist4"/>
+        <has_member rdf:resource="http://example.org/kulturarena/artist5"/>
+        <has_member rdf:resource="http://example.org/kulturarena/artist6"/>
+        <has_member rdf:resource="http://example.org/kulturarena/artist7"/>
+        <has_member rdf:resource="http://example.org/kulturarena/artist8"/>
+        <has_played rdf:resource="http://example.org/kulturarena/concert3"/>
+        <has_played rdf:resource="http://example.org/kulturarena/concert4"/>
+        <has_played rdf:resource="http://example.org/kulturarena/concert5"/>
+        <was_founded_in rdf:resource="http://example.org/kulturarena/country1"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://example.org/kulturarena/provider3 -->
+
+    <owl:NamedIndividual rdf:about="http://example.org/kulturarena/provider3">
+        <rdf:type rdf:resource="http://example.org/kulturarena/music_provider"/>
+        <musicbrainz_artist_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">9c21e094-2fbe-4ba9-9726-891d90f561a9</musicbrainz_artist_id>
+        <genre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pop</genre>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Yasmin Hamdan</name>
+        <has_member rdf:resource="http://example.org/kulturarena/artist9"/>
+        <has_played rdf:resource="http://example.org/kulturarena/concert6"/>
+        <was_founded_in rdf:resource="http://example.org/kulturarena/country1"/>
+    </owl:NamedIndividual>
+</rdf:RDF>

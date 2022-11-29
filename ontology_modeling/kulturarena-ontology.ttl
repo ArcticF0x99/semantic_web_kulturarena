@@ -1,0 +1,305 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix :     <http://example.org/kulturarena/> .
+
+<> a owl:Ontology ;
+   rdfs:label "Kulturarena Ontology"@en .
+
+:concert a owl:Class ;
+   rdfs:label "Concert"@en ;
+   rdfs:comment "A event that is done by music provider at Kulturarena in jena to a specific date."@en .
+
+:music_provider a owl:Class ;
+   rdfs:label "Music provider"@en ;
+   rdfs:comment "An artist or multiple artists that do concerts."@en .
+
+:artist a owl:Class ;
+   rdfs:label "Artist"@en ;
+   rdfs:comment "Is a music provider or is with other artists a part of a music provider."@en .
+
+:country a owl:Class ;
+   rdfs:label "Country"@en ;
+   rdfs:comment "A country."@en .
+
+:has_played a owl:ObjectProperty ;
+   rdfs:label "has played"@en ;
+   rdfs:comment "Defines that someone has played something."@en ;
+   rdfs:domain :music_provider ;
+   rdfs:range :concert ;
+   owl:inverseOf :was_played_by .
+
+:was_played_by a owl:ObjectProperty ;
+   rdfs:label "was played by"@en ;
+   rdfs:comment "Defines that something was played by someone."@en ;
+   rdfs:domain :concert ;
+   rdfs:range :music_provider ;
+   owl:inverseOf :has_played .
+
+:is_member_of a owl:ObjectProperty ;
+   rdfs:label "is member of"@en ;
+   rdfs:comment "Defines that someone is member of something."@en ;
+   rdfs:domain :artist ;
+   rdfs:range :music_provider ;
+   owl:inverseOf :has_member .
+
+:has_member a owl:ObjectProperty ;
+   rdfs:label "has member"@en ;
+   rdfs:comment "Defines that something has someone as a member."@en ;
+   rdfs:domain :music_provider ;
+   rdfs:range :artist ;
+   owl:inverseOf :is_member_of .
+
+:was_founded_in a owl:ObjectProperty ;
+   rdfs:label "was founded in"@en ;
+   rdfs:comment "Defines where something was founded."@en ;
+   rdfs:domain :music_provider ;
+   rdfs:range :country ;
+   owl:inverseOf :is_founding_place_of .
+
+:is_founding_place_of a owl:ObjectProperty ;
+   rdfs:label "is founding place of"@en ;
+   rdfs:comment "Defines what was founded at a specific place."@en ;
+   rdfs:domain :country ;
+   rdfs:range :music_provider ;
+   owl:inverseOf :was_founded_in .
+
+:is_born_in a owl:ObjectProperty,
+              owl:FunctionalProperty ;
+   rdfs:label "is born in"@en ;
+   rdfs:comment "Defines where someone was born."@en ;
+   rdfs:domain :artist ;
+   rdfs:range :country ;
+   owl:inverseOf :is_birth_place_of .
+
+:is_birth_place_of a owl:ObjectProperty ;
+   rdfs:label "is birth place of"@en ;
+   rdfs:comment "Defines the birth place of someone."@en ;
+   rdfs:domain :country ;
+   rdfs:range :artist ;
+   owl:inverseOf :is_born_in .
+
+:name a owl:DatatypeProperty ;
+   rdfs:label "Name"@en ;
+   rdfs:comment "The name of something."@en ;
+   rdfs:domain :music_provider ,
+        :artist ,
+        :country ;
+   rdfs:range xsd:string .
+
+:date a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+   rdfs:label "Date"@en ;
+   rdfs:comment "The date of something."@en ;
+   rdfs:domain :concert ;
+   rdfs:range xsd:date .
+
+:genre a owl:DatatypeProperty ;
+   rdfs:label "Genre"@en ;
+   rdfs:comment "The genre of something."@en ;
+   rdfs:domain :music_provider ;
+   rdfs:range xsd:string .
+
+:musicbrainz_artist_id a owl:DatatypeProperty,
+                         owl:InverseFunctionalProperty ;
+   rdfs:label "MusicBrainz artist ID"@en ;
+   rdfs:comment "The ID of an artist on MusicBrainz."@en ;
+   rdfs:domain :music_provider ;
+   rdfs:range xsd:string .
+
+:gender a owl:DatatypeProperty,
+          owl:FunctionalProperty ;
+   rdfs:label "Gender"@en ;
+   rdfs:comment "The gender of someone."@en ;
+   rdfs:domain :artist ;
+   rdfs:range xsd:string .
+
+:population a owl:DatatypeProperty,
+              owl:FunctionalProperty ;
+   rdfs:label "Population"@en ;
+   rdfs:comment "The population size of something."@en ;
+   rdfs:domain :country ;
+   rdfs:range xsd:integer .
+
+:birthdate a owl:DatatypeProperty,
+             owl:FunctionalProperty ;
+   rdfs:label "Birthdate"@en ;
+   rdfs:comment "Birthdate of someone."@en ;
+   rdfs:domain :artist ;
+   rdfs:range xsd:date .
+
+:provider1 a :music_provider ;
+   :name "BOY"^^xsd:string ;
+   :genre "pop"^^xsd:string ;
+   :musicbrainz_artist_id "2e76bad0-edf3-4a6c-ad79-db87bb5a0d35"^^xsd:string ;
+   :has_played :concert1 ;
+   :has_played :concert2 ;
+   :has_member :artist1 ;
+   :has_member :artist2 ;
+   :was_founded_in :country1 ;
+   :was_founded_in :country2 ;
+   .
+
+:provider2 a :music_provider ;
+   :name "De-Phazz"^^xsd:string ;
+   :genre "Jazz"^^xsd:string ;
+   :musicbrainz_artist_id "5c47ccd3-3f82-46b9-96b8-efdffc83f269"^^xsd:string ;
+   :has_played :concert3 ;
+   :has_played :concert4 ;
+   :has_played :concert5 ;
+   :has_member :artist3 ;
+   :has_member :artist4 ;
+   :has_member :artist5 ;
+   :has_member :artist6 ;
+   :has_member :artist7 ;
+   :has_member :artist8 ;
+   :was_founded_in :country1 ;
+   .
+
+:provider3 a :music_provider ;
+   :name "Yasmin Hamdan"^^xsd:string ;
+   :genre "Pop"^^xsd:string ;
+   :musicbrainz_artist_id "9c21e094-2fbe-4ba9-9726-891d90f561a9"^^xsd:string ;
+   :has_played :concert6 ;
+   :has_member :artist9 ;
+   :was_founded_in :country1 ;
+   .
+
+:artist1 a :artist ;
+   :name "Valeska Steiner"^^xsd:string ;
+   :gender "Female"^^xsd:string ;
+   :birthdate "1985-10-28"^^xsd:date ;
+   :is_born_in :country2 ;
+   :is_member_of :provider1 ;
+   .
+
+:artist2 a :artist ;
+   :name "Sonja Glass"^^xsd:string ;
+   :gender "Female"^^xsd:string ;
+   :birthdate "1976-11-30"^^xsd:date ;
+   :is_born_in :country1 ;
+   :is_member_of :provider1 ;
+   .
+
+:artist3 a :artist ;
+   :name "Pit Baumgartner"^^xsd:string ;
+   :gender "Male"^^xsd:string ;
+   :birthdate "1958-09-28"^^xsd:date ;
+   :is_born_in :country1 ;
+   :is_member_of :provider2 ;
+   .
+
+:artist4 a :artist ;
+   :name "Pat Appleton"^^xsd:string ;
+   :gender "Female"^^xsd:string ;
+   :birthdate "1968-04-12"^^xsd:date ;
+   :is_born_in :country4 ;
+   :is_member_of :provider2 ;
+   .
+
+:artist5 a :artist ;
+   :name "Karl Friederson"^^xsd:string ;
+   :gender "Male"^^xsd:string ;
+   :birthdate "1968-01-08"^^xsd:date ;
+   :is_born_in :country4 ;
+   :is_member_of :provider2 ;
+   .
+
+:artist6 a :artist ;
+   :name "Barbara Lahr"^^xsd:string ;
+   :gender "Female"^^xsd:string ;
+   :birthdate "1957-09-25"^^xsd:date ;
+   :is_born_in :country1 ;
+   :is_member_of :provider2 ;
+   .
+
+:artist7 a :artist ;
+   :name "Oli Rubow"^^xsd:string ;
+   :gender "Male"^^xsd:string ;
+   :birthdate "1972-01-30"^^xsd:date ;
+   :is_born_in :country1 ;
+   :is_member_of :provider2 ;
+   .
+
+:artist8 a :artist ;
+   :name "Joo Kraus"^^xsd:string ;
+   :gender "Male"^^xsd:string ;
+   :birthdate "1966-11-22"^^xsd:date ;
+   :is_born_in :country1 ;
+   :is_member_of :provider2 ;
+   .
+
+:artist9 a :artist ;
+   :name "Yasmin Hamdan"^^xsd:string ;
+   :gender "Female"^^xsd:string ;
+   :birthdate "1976"^^xsd:date ;
+   :is_born_in :country3 ;
+   :is_member_of :provider3 ;
+   .
+
+:concert1 a :concert ;
+   :date "2012"^^xsd:string ;
+   :was_played_by :provider1 ;
+   .
+
+:concert2 a :concert ;
+   :date "2016"^^xsd:string ;
+   :was_played_by :provider1 ;
+   .
+
+:concert3 a :concert ;
+   :date "2001"^^xsd:string ;
+   :was_played_by :provider2 ;
+   .
+
+:concert4 a :concert ;
+   :date "2003"^^xsd:string ;
+   :was_played_by :provider2 ;
+   .
+
+:concert5 a :concert ;
+   :date "2007"^^xsd:string ;
+   :was_played_by :provider2 ;
+   .
+
+:concert6 a :concert ;
+   :date "2015"^^xsd:string ;
+   :was_played_by :provider3 ;
+   .
+
+:country1 a :country ;
+   :name "Germany"^^xsd:string ;
+   :population 83,149,300 ;
+   :is_founding_place_of :provider1 ;
+   :is_founding_place_of :provider2 ;
+   :is_birth_place_of :artist2 ;
+   :is_birth_place_of :artist3 ;
+   :is_birth_place_of :artist4 ;
+   :is_birth_place_of :artist6 ;
+   :is_birth_place_of :artist7 ;
+   :is_birth_place_of :artist8 ;
+   .
+
+:country2 a :country ;
+   :name "Switzerland"^^xsd:string ;
+   :population 8,466,017 ;
+   :is_founding_place_of :provider1 ;
+   :is_birth_place_of :artist1 ;
+   .
+
+:country3 a :country ;
+   :name "Lebanon"^^xsd:string ;
+   :population 5,261,372 ;
+   :is_founding_place_of :provider3 ;
+   :is_birth_place_of :artist9 ;
+   .
+
+:country4 a :country ;
+   :name "United states of america"^^xsd:string ;
+   :population 331,449,281 ;
+   :is_founding_place_of :provider3 ;
+   :is_birth_place_of :artist5 ;
+   .
+
+
