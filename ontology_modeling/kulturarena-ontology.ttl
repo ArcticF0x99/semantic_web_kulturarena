@@ -96,7 +96,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
    rdfs:label "Date"@en ;
    rdfs:comment "The date of something."@en ;
    rdfs:domain :concert ;
-   rdfs:range xsd:date .
+   rdfs:range xsd:string .
 
 :genre a owl:DatatypeProperty ;
    rdfs:label "Genre"@en ;
@@ -130,7 +130,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
    rdfs:label "Birthdate"@en ;
    rdfs:comment "Birthdate of someone."@en ;
    rdfs:domain :artist ;
-   rdfs:range xsd:date .
+   rdfs:range xsd:string .
 
 :provider1 a :music_provider ;
    :name "BOY"^^xsd:string ;
@@ -172,7 +172,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 :artist1 a :artist ;
    :name "Valeska Steiner"^^xsd:string ;
    :gender "Female"^^xsd:string ;
-   :birthdate "1985-10-28"^^xsd:date ;
+   :birthdate "1985-10-28"^^xsd:string ;
    :is_born_in :country2 ;
    :is_member_of :provider1 ;
    .
@@ -180,7 +180,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 :artist2 a :artist ;
    :name "Sonja Glass"^^xsd:string ;
    :gender "Female"^^xsd:string ;
-   :birthdate "1976-11-30"^^xsd:date ;
+   :birthdate "1976-11-30"^^xsd:string ;
    :is_born_in :country1 ;
    :is_member_of :provider1 ;
    .
@@ -188,7 +188,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 :artist3 a :artist ;
    :name "Pit Baumgartner"^^xsd:string ;
    :gender "Male"^^xsd:string ;
-   :birthdate "1958-09-28"^^xsd:date ;
+   :birthdate "1958-09-28"^^xsd:string ;
    :is_born_in :country1 ;
    :is_member_of :provider2 ;
    .
@@ -196,7 +196,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 :artist4 a :artist ;
    :name "Pat Appleton"^^xsd:string ;
    :gender "Female"^^xsd:string ;
-   :birthdate "1968-04-12"^^xsd:date ;
+   :birthdate "1968-04-12"^^xsd:string ;
    :is_born_in :country4 ;
    :is_member_of :provider2 ;
    .
@@ -204,7 +204,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 :artist5 a :artist ;
    :name "Karl Friederson"^^xsd:string ;
    :gender "Male"^^xsd:string ;
-   :birthdate "1968-01-08"^^xsd:date ;
+   :birthdate "1968-01-08"^^xsd:string ;
    :is_born_in :country4 ;
    :is_member_of :provider2 ;
    .
@@ -212,7 +212,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 :artist6 a :artist ;
    :name "Barbara Lahr"^^xsd:string ;
    :gender "Female"^^xsd:string ;
-   :birthdate "1957-09-25"^^xsd:date ;
+   :birthdate "1957-09-25"^^xsd:string ;
    :is_born_in :country1 ;
    :is_member_of :provider2 ;
    .
@@ -220,7 +220,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 :artist7 a :artist ;
    :name "Oli Rubow"^^xsd:string ;
    :gender "Male"^^xsd:string ;
-   :birthdate "1972-01-30"^^xsd:date ;
+   :birthdate "1972-01-30"^^xsd:string ;
    :is_born_in :country1 ;
    :is_member_of :provider2 ;
    .
@@ -228,7 +228,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 :artist8 a :artist ;
    :name "Joo Kraus"^^xsd:string ;
    :gender "Male"^^xsd:string ;
-   :birthdate "1966-11-22"^^xsd:date ;
+   :birthdate "1966-11-22"^^xsd:string ;
    :is_born_in :country1 ;
    :is_member_of :provider2 ;
    .
@@ -236,7 +236,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 :artist9 a :artist ;
    :name "Yasmin Hamdan"^^xsd:string ;
    :gender "Female"^^xsd:string ;
-   :birthdate "1976"^^xsd:date ;
+   :birthdate "1976"^^xsd:string ;
    :is_born_in :country3 ;
    :is_member_of :provider3 ;
    .
