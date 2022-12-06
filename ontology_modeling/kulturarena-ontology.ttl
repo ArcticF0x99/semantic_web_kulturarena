@@ -4,7 +4,7 @@
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix :     <http://example.org/kulturarena/> .
 
-<> a owl:Ontology ;
+: a owl:Ontology ;
    rdfs:label "Kulturarena Ontology"@en .
 
 :concert a owl:Class ;
@@ -22,6 +22,9 @@
 :country a owl:Class ;
    rdfs:label "Country"@en ;
    rdfs:comment "A country."@en .
+
+_:dis a owl:AllDisjointClasses .
+_:dis owl:members (:concert :music_provider :artist :country ) .
 
 :has_played a owl:ObjectProperty ;
    rdfs:label "has played"@en ;
@@ -133,27 +136,27 @@
    :name "BOY"^^xsd:string ;
    :genre "pop"^^xsd:string ;
    :musicbrainz_artist_id "2e76bad0-edf3-4a6c-ad79-db87bb5a0d35"^^xsd:string ;
-   :has_played :concert1 ;
-   :has_played :concert2 ;
-   :has_member :artist1 ;
-   :has_member :artist2 ;
-   :was_founded_in :country1 ;
-   :was_founded_in :country2 ;
+   :has_played :concert1 ,
+               :concert2 ;
+   :has_member :artist1 ,
+               :artist2 ;
+   :was_founded_in :country1 ,
+                   :country2 ;
    .
 
 :provider2 a :music_provider ;
    :name "De-Phazz"^^xsd:string ;
    :genre "Jazz"^^xsd:string ;
    :musicbrainz_artist_id "5c47ccd3-3f82-46b9-96b8-efdffc83f269"^^xsd:string ;
-   :has_played :concert3 ;
-   :has_played :concert4 ;
-   :has_played :concert5 ;
-   :has_member :artist3 ;
-   :has_member :artist4 ;
-   :has_member :artist5 ;
-   :has_member :artist6 ;
-   :has_member :artist7 ;
-   :has_member :artist8 ;
+   :has_played :concert3 ,
+               :concert4 ,
+               :concert5 ;
+   :has_member :artist3 ,
+               :artist4 ,
+               :artist5 ,
+               :artist6 ,
+               :artist7 ,
+               :artist8 ;
    :was_founded_in :country1 ;
    .
 
@@ -271,14 +274,14 @@
 :country1 a :country ;
    :name "Germany"^^xsd:string ;
    :population 83,149,300 ;
-   :is_founding_place_of :provider1 ;
-   :is_founding_place_of :provider2 ;
-   :is_birth_place_of :artist2 ;
-   :is_birth_place_of :artist3 ;
-   :is_birth_place_of :artist4 ;
-   :is_birth_place_of :artist6 ;
-   :is_birth_place_of :artist7 ;
-   :is_birth_place_of :artist8 ;
+   :is_founding_place_of :provider1 ,
+                         :provider2 ;
+   :is_birth_place_of :artist2 ,
+                      :artist3 ,
+                      :artist4 ,
+                      :artist6 ,
+                      :artist7 ,
+                      :artist8 ;
    .
 
 :country2 a :country ;
