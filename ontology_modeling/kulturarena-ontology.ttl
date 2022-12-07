@@ -161,7 +161,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
    .
 
 :provider3 a :music_provider ;
-   :name "Yasmin Hamdan"^^xsd:string ;
+   :name "Yasmine Hamdan"^^xsd:string ;
    :genre "Pop"^^xsd:string ;
    :musicbrainz_artist_id "9c21e094-2fbe-4ba9-9726-891d90f561a9"^^xsd:string ;
    :has_played :concert6 ;
