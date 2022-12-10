@@ -273,7 +273,7 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 
 :country1 a :country ;
    :name "Germany"^^xsd:string ;
-   :population 83,149,300 ;
+   :population 83149300 ;
    :is_founding_place_of :provider1 ,
                          :provider2 ;
    :is_birth_place_of :artist2 ,
@@ -286,21 +286,21 @@ _:dis owl:members (:concert :music_provider :artist :country ) .
 
 :country2 a :country ;
    :name "Switzerland"^^xsd:string ;
-   :population 8,466,017 ;
+   :population 8466017 ;
    :is_founding_place_of :provider1 ;
    :is_birth_place_of :artist1 ;
    .
 
 :country3 a :country ;
    :name "Lebanon"^^xsd:string ;
-   :population 5,261,372 ;
+   :population 5261372 ;
    :is_founding_place_of :provider3 ;
    :is_birth_place_of :artist9 ;
    .
 
 :country4 a :country ;
    :name "United states of america"^^xsd:string ;
-   :population 331,449,281 ;
+   :population 331449281 ;
    :is_founding_place_of :provider3 ;
    :is_birth_place_of :artist5 ;
    .
