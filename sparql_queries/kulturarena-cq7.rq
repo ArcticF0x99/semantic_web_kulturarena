@@ -1,0 +1,42 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX :     <http://example.org/kulturarena/>
+
+SELECT (?c_date as ?Concert_year) (?male_proportion as ?Male_proportion) (?female_proportion as ?Female_proportion)
+WHERE {
+  {
+    SELECT ?c_date (COUNT(?gender_male) as ?count_gender_male) (COUNT(?gender_female) as ?count_gender_female)
+    WHERE {
+  {
+  SELECT ?c_date ?gender_male
+    WHERE {
+      ?provider1 rdf:type :music_provider ;
+                 :has_member ?member1 ;
+                 :has_played ?concert1 .
+      ?member1 :gender ?gender_male .
+      ?concert1 :date ?c_date .
+      FILTER (?gender_male = "Male"^^xsd:string)
+    }
+  }
+  UNION
+  {
+    SELECT ?c_date ?gender_female
+    WHERE {
+      ?provider2 rdf:type :music_provider ;
+                 :has_member ?member2 ;
+                 :has_played ?concert2 .
+      ?member2 :gender ?gender_female .
+      ?concert2 :date ?c_date .
+      FILTER (?gender_female = "Female"^^xsd:string)
+    }
+  }
+}
+GROUP BY ?c_date
+ORDER BY ?c_date
+  }
+  BIND (?count_gender_male / (?count_gender_male + ?count_gender_female) as ?male_proportion)
+  BIND (?count_gender_female / (?count_gender_male + ?count_gender_female) as ?female_proportion)
+}
+

@@ -1,0 +1,28 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX :     <http://example.org/kulturarena/>
+
+SELECT (?provider2 as ?Provider_IRI) (MAX(?date_diff) as ?Max_concert_date_difference)
+WHERE {
+  ?provider2 rdf:type :music_provider ;
+             :name ?name2 ;
+             :has_played ?concert2 .
+  ?concert2 :date ?date2 .
+  {
+    SELECT ?provider1 ?concert1 ?date1
+    WHERE {
+      ?provider1 rdf:type :music_provider ;
+                 :name ?name1 ;
+                 :has_played ?concert1 .
+      ?concert1 :date ?date1 .
+    }
+    OFFSET 1
+  }
+  BIND( IF(?date1 != ?date2 && ?provider1 = ?provider2, xsd:integer(?date1) - xsd:integer(?date2), "") as ?date_diff )
+  BIND(replace(strafter(str(?concert1), str(:)), ".*(.)$", "$1") as ?last_char1)
+  BIND(replace(strafter(str(?concert2), str(:)), ".*(.)$", "$1") as ?last_char2)
+  FILTER(?date_diff != ""^^xsd:string && ?date_diff > 0 && xsd:integer(?last_char1) - xsd:integer(?last_char2) = 1)
+}
+GROUP BY ?provider2

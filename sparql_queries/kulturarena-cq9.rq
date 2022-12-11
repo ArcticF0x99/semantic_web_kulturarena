@@ -1,0 +1,25 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX :     <http://example.org/kulturarena/>
+
+SELECT (?c_date as ?Concert_year) (?average_age as ?Average_age)
+WHERE {
+  {
+    SELECT ?c_date (SUM(?m_age) as ?sum_m_age) (COUNT (?m_age) as ?count_m_age)
+	WHERE {
+      ?provider rdf:type :music_provider ;
+                :has_member ?member ;
+                :has_played ?concert .
+      ?member :birthdate ?m_birth .
+      ?concert :date ?c_date .
+      BIND (SUBSTR(?m_birth, 1, 4) as ?m_birth_year)
+      BIND (xsd:integer(?c_date) - xsd:integer(?m_birth_year) as ?m_age)
+    }
+    GROUP BY ?c_date
+  }
+  BIND (?sum_m_age / ?count_m_age as ?average_age)
+}
+ORDER BY DESC(?average_age)
+LIMIT 1

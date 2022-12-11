@@ -1,0 +1,16 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX :     <http://example.org/kulturarena/>
+
+SELECT DISTINCT (?country as ?Country_IRI) (?country_name as ?Country_name) (COUNT(?country) as ?Concert_count) 
+WHERE {
+  ?provider rdf:type :music_provider ;
+            :has_played ?concert ;
+            :was_founded_in ?country .
+  ?country :name ?country_name .
+  ?concert :date ?date .
+  FILTER (?date = "2015"^^xsd:string)
+}
+GROUP BY ?country ?country_name

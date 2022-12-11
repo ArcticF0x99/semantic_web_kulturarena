@@ -1,0 +1,20 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX :     <http://example.org/kulturarena/>
+
+SELECT (?country as ?Country_IRI) (?country_name as ?Country_name) 
+WHERE {
+  {
+    SELECT ?country ?country_name (Count(?provider) as ?p_count)
+    WHERE {
+      ?country rdf:type :country ;
+               :is_founding_place_of ?provider ;
+               :name ?country_name .
+    }
+    GROUP BY ?country ?country_name
+    ORDER BY DESC(?p_count)
+    LIMIT 1
+  }
+}

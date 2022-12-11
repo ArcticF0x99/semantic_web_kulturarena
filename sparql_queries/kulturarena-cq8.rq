@@ -1,0 +1,30 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX :     <http://example.org/kulturarena/>
+
+SELECT (?provider as ?Provider_IRI) (?p_name as ?Provider_name) (?fc_name as ?Country_name)
+WHERE {
+  ?provider rdf:type :music_provider ;
+            :name ?p_name ;
+            :was_founded_in ?found_country .
+  ?found_country :name ?fc_name .
+  FILTER (?fc_name = ?c_name)
+  {
+    SELECT ?c_name
+	WHERE {
+      ?country rdf:type :country ;
+               :name ?c_name ;:population ?c_pop .
+      ?provider1 rdf:type :music_provider ;
+                :was_founded_in ?found_country1 .
+      ?found_country1 :name ?fc_name1 .
+      FILTER (?c_name = ?fc_name1)
+    }
+    GROUP BY ?c_pop ?c_name
+    ORDER BY DESC(?c_pop)
+    LIMIT 1
+  }
+}
+
+
